@@ -1,6 +1,7 @@
 import makeQueue from './index'
 
-// A contrived shared reources that may be used by all job runs.
+// A contrived shared reources that may be used by all job executions.
+// But it must not be used concurrently by more than one job execution.
 let sharedResource = 0
 
 async function job (config: number, seconds: number): Promise<number> {
