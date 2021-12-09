@@ -1,4 +1,6 @@
 Implement the module `index.ts`.
+An example test is available in `test.ts`.
+`npm test` runs `test.ts`.
 
 It exports the only function called, for example, `makeQueue`.
 `makeQueue` accepts a function called, for example, `job`, and an optional configuration object, and returns a function called, for example, `queuedJob`.
