@@ -8,6 +8,6 @@ export default function <T extends (...args: any[]) => any> (
 ): (...args: Parameters<T>) => Promise<Awaited<ReturnType<T>>> {
   // TODO: this is not correctly implemented.
 
-  config.limit;
-  return async (...args) => job(...args);
+  config.limit
+  return async (...args) => job(...args)
 }

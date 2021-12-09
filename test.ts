@@ -16,7 +16,7 @@ async function job (config: number, seconds: number): Promise<number> {
     return config
   }
 
-  await promisify(setTimeout)(seconds * 1000);
+  await promisify(setTimeout)(seconds * 1000)
 
   // Check if shared resource is exclusively used by the currently running job. 
   if (sharedResource !== config) {
@@ -28,7 +28,7 @@ async function job (config: number, seconds: number): Promise<number> {
   }
 
   console.log('Job', config, 'finishes')
-  return config;
+  return config
 }
 
 const queuedJob = makeQueue(job)
