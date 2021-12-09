@@ -1,3 +1,4 @@
+import { promisify } from 'util'
 import makeQueue from './index'
 
 // A contrived shared reources that may be used by all job executions.
@@ -15,21 +16,19 @@ async function job (config: number, seconds: number): Promise<number> {
     return config
   }
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      // Check if shared resource is exclusively used by the currently running job. 
-      if (sharedResource !== config) {
-        console.error(
-          'Shared resource should only be used by job',
-          config,
-          'but was changed by strangers!',
-        )
-      }
+  await promisify(setTimeout)(seconds * 1000);
 
-      console.log('Job', config, 'finishes')
-      resolve(config)
-    }, seconds * 1000)
-  })
+  // Check if shared resource is exclusively used by the currently running job. 
+  if (sharedResource !== config) {
+    console.error(
+      'Shared resource should only be used by job',
+      config,
+      'but was changed by strangers!',
+    )
+  }
+
+  console.log('Job', config, 'finishes')
+  return config;
 }
 
 const queuedJob = makeQueue(job)
